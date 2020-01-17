@@ -1,0 +1,21 @@
+---
+- hosts: web
+  tasks:
+   
+   - name: stop the container if it already exists
+     command: docker stop contact-app
+     ignore_errors: yes
+
+   - name: delete container if it already exists
+     command: docker rm contact-app 
+     ignore_errors: yes
+ 
+   - name: delete image if it exists
+     command: docker rmi contact-app
+     ignore_errors: yes
+
+   - name: pulling the image
+     command: docker pull patricefozin/contact-app:1.0 
+
+   - name: run the container
+     command: docker run -dit --name contact-app -p 7894:8080 patricefozin/contact-app:1.0

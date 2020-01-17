@@ -1,0 +1,11 @@
+---
+- hosts: k8s
+  user: root
+  tasks: 
+
+
+    - name: sample-web-app deploy
+      command: kubectl apply -f /root/deploy_project1920.yml
+
+    - name: dpeloy service for contact app
+      command: kubectl apply -f /root/service_project1920.yml

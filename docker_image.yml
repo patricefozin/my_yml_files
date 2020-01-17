@@ -1,0 +1,16 @@
+---
+- hosts: localhost 
+  tasks: 
+
+  - name: deleting any image that might the name that we are trying to assign
+    command: docker rmi holliday-app:1.0
+    ignore_errors: yes
+
+  - name: create docker image
+    command: docker build -t holliday-app:1.0 /home/ansadmin/artifact 
+
+  - name: Tag the image
+    command: docker tag holliday-app:1.0 patricefozin/holliday-app:1.0
+
+  - name: push image to docker hub
+    command: docker push patricefozin/holliday-app:1.0

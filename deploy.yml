@@ -1,0 +1,29 @@
+---
+
+# This playbook is meant to grab an image from github and run a container from that image. It would first stop any container that 
+# has the same name as the one we are attempting to create. It would also remove that container, then remove any image with the name
+# similar to the image we will be pulling. Once all that cleanup done, it will pull a fresh image and run a fresh container 
+# from it.
+#
+#
+ - hosts: web
+   tasks: 
+  
+   - name: Stop the container (The container name enter is whatever name we will be assigning to our new container-web in this case)
+     command: docker stop web 
+     ignore_errors: yes 
+ 
+   - name: Remove container (The image name enter is whatever name we will be assigning to our new image - web in this case)
+     command: docker rm web
+     ignore_errors: yes
+ 
+   - name: Remove image if exist 
+     command: docker rmi patricefozin/web-app-0101:1.0 
+     ignore_errors: yes
+
+   - name: pull image from docker hub
+     command: docker pull patricefozin/web-app-0101:1.0
+     ignore_errors: yes
+
+   - name: Run container 
+     command: docker run -dit --name web -p 9999:8080 patricefozin/web-app-0101:1.0 

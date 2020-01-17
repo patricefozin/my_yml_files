@@ -1,0 +1,16 @@
+---
+- hosts: localhost 
+  tasks: 
+
+  - name: deleting any image that might the name that we are trying to assign
+    command: docker rmi project_1920:1.0
+    ignore_errors: yes
+
+  - name: create docker image
+    command: docker build -t project_1920:1.0 /home/ansadmin/artifact 
+
+  - name: Tag the image
+    command: docker tag project_1920:1.0 patricefozin/project_1920:1.0
+
+  - name: push image to docker hub
+    command: docker push patricefozin/project_1920:1.0

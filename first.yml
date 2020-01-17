@@ -1,0 +1,12 @@
+---
+- hosts: web
+#  become: true
+  tasks:
+
+  - name: Create a file
+    file: path=/tmp/file2 state=touch owner=ansadmin mode='0600'
+    ignore_errors: yes 
+
+  - name: # create directory in tmp
+    file: path=/tmp/finance1 state=directory mode='0777'
+    ignore_errors: yes 

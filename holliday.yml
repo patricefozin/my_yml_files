@@ -1,0 +1,21 @@
+---
+- hosts: web
+  tasks:
+
+   - name: stop container if already exits
+     command: docker stop holliday 
+     ignore_errors: yes 
+
+   - name: remove container if exits
+     command: docker rm holliday
+     ignore_errors: yes
+
+   - name: remove image if exists 
+     command: docker rmi patricefozin/holliday-app:1.0
+     ignore_errors: yes
+
+   - name: pull the image 
+     command: docker pull patricefozin/holliday-app:1.0
+
+   - name: run the container
+     command: docker run -dit --name holliday -p 1254:8080 patricefozin/holliday-app:1.0

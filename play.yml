@@ -1,0 +1,9 @@
+---
+ - hosts: web
+   tasks:
+
+   - name: Pulling ubuntu image
+     command: docker pull ubuntu:14.04
+
+   - name: spin a tomcat container    
+     command: docker run -dit --name tomcat1 -p 8080:8080 tomcat

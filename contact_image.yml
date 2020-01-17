@@ -1,0 +1,20 @@
+---
+- hosts: localhost
+  tasks:
+
+
+    - name: delete the image if exists already
+      command: docker rmi -f contact-app:1.0
+      ignore_errors: yes 
+
+    - name: build image 
+      command: docker build -t contact-app:1.0 /home/ansadmin/artifact/
+
+    - name: tag image 
+      command: docker tag contact-app:1.0 patricefozin/contact-app:1.0
+
+    - name: push the image
+      command: docker push patricefozin/contact-app:1.0
+
+
+   
